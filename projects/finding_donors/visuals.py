@@ -110,11 +110,10 @@ def evaluate(results, accuracy, f1):
     patches = []
     for i, learner in enumerate(results.keys()):
         patches.append(mpatches.Patch(color = colors[i], label = learner))
-    pl.legend(handles = patches, bbox_to_anchor = (-.80, 2.53), \
-               loc = 'upper center', borderaxespad = 0., ncol = 3, fontsize = 'x-large')
-    
+    pl.legend(handles = patches, loc = 'upper center', borderaxespad = 0., ncol = 3, fontsize = 'medium')
+    #pl.legend(handles=patches, loc = 'upper center')
     # Aesthetics
-    pl.suptitle("Performance Metrics for Three Supervised Learning Models", fontsize = 16, y = 1.10)
+    #pl.suptitle("Performance Metrics for Three Supervised Learning Models", fontsize = 16, y = 1.10)
     pl.tight_layout()
     pl.show()
     
@@ -125,18 +124,18 @@ def feature_plot(importances, X_train, y_train):
     indices = np.argsort(importances)[::-1]
     columns = X_train.columns.values[indices[:5]]
     values = importances[indices][:5]
-
+    
     # Creat the plot
     fig = pl.figure(figsize = (9,5))
-    pl.title("Normalized Weights for First Five Most Predictive Features", fontsize = 16)
-    pl.bar(np.arange(5), values, width = 0.6, align="center", color = '#00A000', \
+    pl.title("Normalized Weights for First Five Most Predictive Features", fontsize = 10)
+    pl.bar(np.arange(5), values, width = 0.4, align="center", color = '#00A000', \
           label = "Feature Weight")
     pl.bar(np.arange(5) - 0.3, np.cumsum(values), width = 0.2, align = "center", color = '#00A0A0', \
           label = "Cumulative Feature Weight")
     pl.xticks(np.arange(5), columns)
     pl.xlim((-0.5, 4.5))
-    pl.ylabel("Weight", fontsize = 12)
-    pl.xlabel("Feature", fontsize = 12)
+    pl.ylabel("Weight", fontsize = 10)
+    pl.xlabel("Feature", fontsize = 10)
     
     pl.legend(loc = 'upper center')
     pl.tight_layout()
